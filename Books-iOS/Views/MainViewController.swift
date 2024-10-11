@@ -21,6 +21,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         searchBar.delegate = self
         setupCollectionView()
         setupBindings()

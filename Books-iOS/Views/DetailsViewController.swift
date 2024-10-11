@@ -22,7 +22,7 @@ class DetailsViewController: UIViewController {
         guard let book = book else { return }
         print(book.title)
         titleLabel.text = book.title
-        descriptionLabel.text = book.description
+        descriptionLabel.text = book.bookDescription
 //        if book.isFavorite ?? <#default value#> {
 //            favButton.setImage(.checkmark, for: .normal)
 //        } else {

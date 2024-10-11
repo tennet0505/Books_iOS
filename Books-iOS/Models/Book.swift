@@ -12,7 +12,7 @@ struct Book: Decodable {
     var title: String
     var author: String
     var imageUrl: String
-    var description: String
+    var bookDescription: String
     var isFavorite: Bool? = false
 }
 
