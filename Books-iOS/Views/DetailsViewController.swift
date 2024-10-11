@@ -14,17 +14,19 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var book: Book? = nil
+    private let viewModel = BookViewModel()
+    var bookId: String?
     var isFavorite: Bool = false
-
+    var book: Book?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let book = book else { return }
-        print(book.title)
-        titleLabel.text = book.title
-        descriptionLabel.text = book.bookDescription
-        isFavorite = book.isFavorite ?? false
+        guard let id = bookId else { return }
+        book = viewModel.fetchBookById(id)
+        titleLabel.text = book?.title
+        descriptionLabel.text = book?.bookDescription
+        isFavorite = book?.isFavorite ?? false
         setupFavoriteButton()
     }
     
@@ -32,6 +34,9 @@ class DetailsViewController: UIViewController {
         guard let book = book else { return }
         isFavorite.toggle()
         setupFavoriteButton()
+        var favoriteBook = book
+        favoriteBook.isFavorite = isFavorite
+        viewModel.toggleFavoriteStatus(for: favoriteBook)        
     }
     
     func setupFavoriteButton() {

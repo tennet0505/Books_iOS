@@ -66,12 +66,15 @@ class APIService {
     }
 
     private func saveBooksToDB(books: [Book]) {
+        CoreDataManager.shared.removeAllBooks()
         books.forEach { book in
-            CoreDataManager.shared.addBook(id: book.id,
+            print(book)
+            CoreDataManager.shared.addOrUpdateBook(id: book.id,
                                            title: book.title,
                                            author: book.author,
                                            imageUrl: book.imageUrl,
-                                           bookDescription: book.bookDescription)
+                                           bookDescription: book.bookDescription,
+                                           isFavorite: book.isFavorite ?? false)
         }
     }
 }

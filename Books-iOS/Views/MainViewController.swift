@@ -23,6 +23,7 @@ class MainViewController: UIViewController {
         searchBar.delegate = self
         setupCollectionView()
         setupBindings()
+        viewModel.fetchBooks()
         
     }
     
@@ -80,7 +81,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         let book = viewModel.filteredBooks[indexPath.row]
         let storyboard =  UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        vc.book = book
+        vc.bookId = book.id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
