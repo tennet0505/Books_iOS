@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BookCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     func configure(with book: Book) {
-        imageView.image = UIImage(named: "placeholder")
+        let url = URL(string: book.imageUrl)
+        imageView.kf.setImage(with: url)
         titleLabel.text = book.title
     }
 }

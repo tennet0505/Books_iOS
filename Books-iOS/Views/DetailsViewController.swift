@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailsViewController: UIViewController {
 
@@ -24,6 +25,8 @@ class DetailsViewController: UIViewController {
         
         guard let id = bookId else { return }
         book = viewModel.fetchBookById(id)
+        let url = URL(string: book?.imageUrl ?? "")
+        imageView.kf.setImage(with: url)
         titleLabel.text = book?.title
         descriptionLabel.text = book?.bookDescription
         isFavorite = book?.isFavorite ?? false
