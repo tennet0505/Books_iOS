@@ -41,13 +41,12 @@ class BookViewModel: ObservableObject {
     
     private func setupBindings() {
         $searchQuery
-            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
-            .removeDuplicates()
-            .map { [weak self] query in
-                self?.filterBooks(query: query)
-            }
-            .sink { _ in }
-            .store(in: &cancellables)
+             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+             .removeDuplicates()
+             .sink { [weak self] query in
+                 self?.filterBooks(query: query)
+             }
+             .store(in: &cancellables)
     }
 
     private func filterBooks(query: String) {

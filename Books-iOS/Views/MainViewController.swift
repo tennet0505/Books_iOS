@@ -15,43 +15,32 @@ class MainViewController: UIViewController {
     
     private let viewModel = BookViewModel()
     private var cancellables = Set<AnyCancellable>()
-    
-    var books: [Book] = []
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        navigationItem.title = "Books"
         searchBar.delegate = self
         setupCollectionView()
         setupBindings()
         
     }
-
+    
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
-                let spacing: CGFloat = 10
-        let numberOfColumns: CGFloat = 2
-        
-        let totalSpacing = (2 * spacing) + ((numberOfColumns - 1) * spacing)
-        let itemWidth = (collectionView.frame.width - totalSpacing) / numberOfColumns
-        
-        let aspectRatio: CGFloat = 1.5 / 1
-        let itemHeight = itemWidth * aspectRatio
-        
-        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumInteritemSpacing = spacing
-        layout.minimumLineSpacing = spacing
-        
-        collectionView.collectionViewLayout = layout
+        layout.scrollDirection = .vertical //.horizontal
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
+        collectionView.setCollectionViewLayout(layout, animated: true)
     }
     
     private func setupBindings() {
-        viewModel.$books
+        // Observe filteredBooks, not books
+        viewModel.$filteredBooks
             .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             }
             .store(in: &cancellables)
         
@@ -70,9 +59,13 @@ class MainViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
 }
 
-extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.filteredBooks.count
     }
@@ -89,6 +82,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         let vc = storyboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
         vc.book = book
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let layout = collectionViewLayout as! UICollectionViewFlowLayout
+        let width = collectionView.frame.width / 2 - layout.minimumInteritemSpacing
+        
+        return CGSize(width: width, height: width * 1.5)
     }
 }
 

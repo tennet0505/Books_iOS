@@ -29,7 +29,7 @@ class APIService {
             .map(\.data)
             .decode(type: [Book].self, decoder: JSONDecoder())
             .mapError { error in
-                if let urlError = error as? URLError {
+                if error is URLError {
                     return .requestFailed
                 } else {
                     return .decodingFailed

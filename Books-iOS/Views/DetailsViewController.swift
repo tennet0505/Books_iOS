@@ -15,6 +15,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     
     var book: Book? = nil
+    var isFavorite: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,15 +24,19 @@ class DetailsViewController: UIViewController {
         print(book.title)
         titleLabel.text = book.title
         descriptionLabel.text = book.bookDescription
-//        if book.isFavorite ?? <#default value#> {
-//            favButton.setImage(.checkmark, for: .normal)
-//        } else {
-//            favButton.setImage(.none, for: .normal)
-//        }
+        isFavorite = book.isFavorite ?? false
+        setupFavoriteButton()
     }
     
     @IBAction func favoriteButtonAction(_ sender: Any) {
-        
+        guard let book = book else { return }
+        isFavorite.toggle()
+        setupFavoriteButton()
+    }
+    
+    func setupFavoriteButton() {
+        let imageName = isFavorite ? "heart.fill" : "heart"
+        favButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
 }
