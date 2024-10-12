@@ -129,6 +129,23 @@ class CoreDataManager {
         }
     }
     
+    // Fetch my library
+    func fetchFavoriteBooks() -> [BookEntity] {
+        let fetchRequest: NSFetchRequest<BookEntity> = BookEntity.fetchRequest()
+        
+        // Set the predicate to filter only favorite books
+        let predicate = NSPredicate(format: "isFavorite == %@", NSNumber(value: true))
+        fetchRequest.predicate = predicate
+        
+        do {
+            let favoriteBooks = try CoreDataManager.shared.persistentContainer.viewContext.fetch(fetchRequest)
+            return favoriteBooks
+        } catch {
+            print("Failed to fetch favorite books: \(error)")
+            return []
+        }
+    }
+    
     // Delete a book
     func deleteBook(book: BookEntity) {
         context.delete(book)

@@ -1,22 +1,20 @@
 //
-//  ViewController.swift
+//  MyLibraryViewController.swift
 //  Books-iOS
 //
-//  Created by Oleg Ten on 11/10/2024.
+//  Created by Oleg Ten on 12/10/2024.
 //
 
 import UIKit
 import Combine
 
-class MainViewController: UIViewController {
-    
+class MyLibraryViewController: UIViewController {
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     private let viewModel = BookViewModel()
     private var cancellables = Set<AnyCancellable>()
-        
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +22,11 @@ class MainViewController: UIViewController {
         searchBar.delegate = self
         setupCollectionView()
         setupBindings()
-        viewModel.fetchBooks()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.fetchFavBooks()
     }
     
     func setupCollectionView() {
@@ -66,7 +67,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension MyLibraryViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.filteredBooks.count
     }
@@ -93,9 +94,8 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension MyLibraryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchQuery = searchText
     }
 }
-

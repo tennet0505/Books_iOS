@@ -12,8 +12,9 @@ class DetailsViewController: UIViewController {
 
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var bookTitle: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
     
     private let viewModel = BookViewModel()
     var bookId: String?
@@ -27,9 +28,10 @@ class DetailsViewController: UIViewController {
         book = viewModel.fetchBookById(id)
         let url = URL(string: book?.imageUrl ?? "")
         imageView.kf.setImage(with: url)
-        titleLabel.text = book?.title
         descriptionLabel.text = book?.bookDescription
         isFavorite = book?.isFavorite ?? false
+        bookTitle.text = book?.title
+        authorLabel.text = book?.author
         setupFavoriteButton()
     }
     

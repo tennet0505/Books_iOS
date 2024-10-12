@@ -13,11 +13,16 @@ class BookViewModel: ObservableObject {
     @Published var filteredBooks: [Book] = []
     @Published var searchQuery: String = ""
     @Published var errorMessage: String? = nil
-    
     private var cancellables = Set<AnyCancellable>()
     
     init() {
         setupBindings()
+    }
+    
+    func fetchFavBooks() {
+        let booksFiltered = CoreDataManager.shared.fetchFavoriteBooks().map{ convertToBook($0) }
+        books = booksFiltered
+        filteredBooks = booksFiltered
     }
     
     func fetchBooks() {
@@ -71,8 +76,6 @@ class BookViewModel: ObservableObject {
             books[index] = updatedBook
             filteredBooks[index] = updatedBook
         }
-        
-        print(updatedBook)
     }
     
     func fetchBookById(_ id: String) -> Book? {
