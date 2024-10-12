@@ -52,7 +52,11 @@ class BookViewModel: ObservableObject {
         if query.isEmpty {
             filteredBooks = books
         } else {
-            filteredBooks = books.filter { $0.title.lowercased().contains(query.lowercased()) }
+            filteredBooks = books.filter { book in
+                let titleMatches = book.title.lowercased().contains(query.lowercased())
+                let authorMatches = book.author.lowercased().contains(query.lowercased())
+                return titleMatches || authorMatches
+            }
         }
     }
     

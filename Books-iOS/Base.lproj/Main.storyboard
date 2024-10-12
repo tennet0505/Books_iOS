@@ -35,30 +35,54 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-st-EcP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="173" height="193"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="173" height="230"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ES-XB-MUo">
-                                                    <rect key="frame" x="8" y="201" width="157" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="Vk0-NP-qn4"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="rqE-Fs-K2N">
+                                                    <rect key="frame" x="0.0" y="0.0" width="173" height="230"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ES-XB-MUo">
+                                                    <rect key="frame" x="8" y="24" width="157" height="24.666666666666671"/>
+                                                    <fontDescription key="fontDescription" name="STIXTwoText_Bold" family="STIX Two Text" pointSize="24.571479797363281"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhL-Pg-aHA">
+                                                    <rect key="frame" x="8" y="203.66666666666666" width="157" height="14.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="7ES-XB-MUo" secondAttribute="bottom" constant="8" id="8SX-qG-IZn"/>
+                                                <constraint firstItem="rqE-Fs-K2N" firstAttribute="top" secondItem="txD-KG-fgs" secondAttribute="top" id="AlM-W0-qmA"/>
+                                                <constraint firstItem="7ES-XB-MUo" firstAttribute="leading" secondItem="txD-KG-fgs" secondAttribute="leading" constant="8" id="Cqa-t4-x3D"/>
                                                 <constraint firstAttribute="trailing" secondItem="PaF-st-EcP" secondAttribute="trailing" id="GMW-be-EM7"/>
+                                                <constraint firstAttribute="bottom" secondItem="hhL-Pg-aHA" secondAttribute="bottom" constant="12" id="Kow-X1-EpH"/>
                                                 <constraint firstItem="PaF-st-EcP" firstAttribute="top" secondItem="txD-KG-fgs" secondAttribute="top" id="Lp8-7H-LWH"/>
-                                                <constraint firstItem="7ES-XB-MUo" firstAttribute="leading" secondItem="txD-KG-fgs" secondAttribute="leading" constant="8" id="TCB-aL-C5D"/>
-                                                <constraint firstAttribute="trailing" secondItem="7ES-XB-MUo" secondAttribute="trailing" constant="8" id="fNA-9G-h0f"/>
+                                                <constraint firstAttribute="trailing" secondItem="hhL-Pg-aHA" secondAttribute="trailing" constant="8" id="Mwq-UL-R7i"/>
+                                                <constraint firstAttribute="trailing" secondItem="rqE-Fs-K2N" secondAttribute="trailing" id="X6B-T2-HWz"/>
+                                                <constraint firstAttribute="trailing" secondItem="7ES-XB-MUo" secondAttribute="trailing" constant="8" id="e38-87-qzM"/>
+                                                <constraint firstItem="rqE-Fs-K2N" firstAttribute="leading" secondItem="txD-KG-fgs" secondAttribute="leading" id="gUu-0A-SCJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="rqE-Fs-K2N" secondAttribute="bottom" id="gls-i6-IWf"/>
                                                 <constraint firstItem="PaF-st-EcP" firstAttribute="leading" secondItem="txD-KG-fgs" secondAttribute="leading" id="i37-nW-MGE"/>
-                                                <constraint firstItem="7ES-XB-MUo" firstAttribute="top" secondItem="PaF-st-EcP" secondAttribute="bottom" constant="8" id="jhn-kU-Ya2"/>
+                                                <constraint firstItem="hhL-Pg-aHA" firstAttribute="leading" secondItem="txD-KG-fgs" secondAttribute="leading" constant="8" id="ksY-tO-83b"/>
+                                                <constraint firstAttribute="bottom" secondItem="PaF-st-EcP" secondAttribute="bottom" id="rte-sd-kxG"/>
+                                                <constraint firstItem="7ES-XB-MUo" firstAttribute="top" secondItem="txD-KG-fgs" secondAttribute="top" constant="24" id="t3l-s0-jHn"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="173" height="230"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <outlet property="author" destination="hhL-Pg-aHA" id="job-MA-jnA"/>
                                             <outlet property="imageView" destination="PaF-st-EcP" id="cyI-az-5j5"/>
                                             <outlet property="titleLabel" destination="7ES-XB-MUo" id="bic-dQ-Rn8"/>
                                         </connections>
@@ -182,10 +206,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvD-Gd-fbF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23.664122137404579" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="225" y="4"/>
         </scene>
     </scenes>
     <resources>
+        <image name="gradient" width="1125" height="522"/>
         <image name="placeholder" width="329.77792358398438" height="406.00738525390625"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">

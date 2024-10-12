@@ -11,10 +11,12 @@ import Kingfisher
 class BookCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var author: UILabel!
     
     func configure(with book: Book) {
         let url = URL(string: book.imageUrl)
         imageView.kf.setImage(with: url)
         titleLabel.text = book.title
+        author.text = book.author
     }
 }

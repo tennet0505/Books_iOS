@@ -135,7 +135,6 @@ class CoreDataManager {
         saveContext()
     }
     
-    // Delete all books (optional, if needed elsewhere)
     func deleteAllBooks() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = BookEntity.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
