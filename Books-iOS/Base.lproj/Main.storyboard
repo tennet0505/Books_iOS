@@ -210,7 +210,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tum-0F-i1s">
-                                                <rect key="frame" x="334" y="445" width="50.666666666666686" height="34.333333333333314"/>
+                                                <rect key="frame" x="334.33333333333331" y="445.66666666666669" width="50.666666666666686" height="34.333333333333314"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
@@ -279,6 +279,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Library is empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u1-fl-Nvn">
+                                <rect key="frame" x="138.33333333333334" y="416" width="116.33333333333334" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="K0H-MG-5LK">
                                 <rect key="frame" x="16" y="175" width="361" height="586"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -371,6 +377,8 @@
                             <constraint firstItem="K0H-MG-5LK" firstAttribute="top" secondItem="4tQ-Fz-Wnq" secondAttribute="bottom" constant="16" id="NfN-zp-Yrf"/>
                             <constraint firstItem="QsK-5x-zYE" firstAttribute="bottom" secondItem="K0H-MG-5LK" secondAttribute="bottom" constant="8" id="OP0-Gg-I5U"/>
                             <constraint firstItem="4tQ-Fz-Wnq" firstAttribute="trailing" secondItem="QsK-5x-zYE" secondAttribute="trailing" constant="-7" id="fLe-fr-IxW"/>
+                            <constraint firstItem="4u1-fl-Nvn" firstAttribute="centerY" secondItem="gio-zU-opR" secondAttribute="centerY" id="fV8-cQ-zoh"/>
+                            <constraint firstItem="4u1-fl-Nvn" firstAttribute="centerX" secondItem="gio-zU-opR" secondAttribute="centerX" id="ilI-lw-nr2"/>
                             <constraint firstItem="4tQ-Fz-Wnq" firstAttribute="leading" secondItem="QsK-5x-zYE" secondAttribute="leading" constant="7" id="pUR-Kw-Ww0"/>
                             <constraint firstItem="QsK-5x-zYE" firstAttribute="trailing" secondItem="K0H-MG-5LK" secondAttribute="trailing" constant="16" id="uVA-Mj-71H"/>
                         </constraints>
@@ -437,7 +445,7 @@
         <image name="books.vertical.fill" catalog="system" width="128" height="110"/>
         <image name="gradient" width="1125" height="522"/>
         <image name="heart" catalog="system" width="128" height="107"/>
-        <image name="placeholder" width="329.77792358398438" height="406.00738525390625"/>
+        <image name="placeholder" width="200" height="300"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

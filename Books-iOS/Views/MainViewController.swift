@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SVProgressHUD
 
 class MainViewController: UIViewController {
     
@@ -49,6 +50,16 @@ class MainViewController: UIViewController {
             .sink { [weak self] errorMessage in
                 if let message = errorMessage {
                     self?.showErrorAlert(message: message)
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$isLoading
+            .sink { isLoading in
+                if isLoading {
+                    SVProgressHUD.show()
+                } else {
+                    SVProgressHUD.dismiss()
                 }
             }
             .store(in: &cancellables)

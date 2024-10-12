@@ -1,16 +1,22 @@
 PODS:
   - Kingfisher (8.0.3)
+  - SVProgressHUD (2.3.1):
+    - SVProgressHUD/Core (= 2.3.1)
+  - SVProgressHUD/Core (2.3.1)
 
 DEPENDENCIES:
   - Kingfisher
+  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
     - Kingfisher
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   Kingfisher: bbf78af014cc845cf9a799363f627b5212784165
+  SVProgressHUD: 4837c74bdfe2e51e8821c397825996a8d7de6e22
 
-PODFILE CHECKSUM: f849abd0c5157aadf8e164940e5cb99919921faa
+PODFILE CHECKSUM: cd2192afa031641836bfc5f669c60a67bb3f80d2
 
 COCOAPODS: 1.15.2

@@ -77,7 +77,6 @@ class CoreDataManager {
                 newBook.imageUrl = imageUrl
                 newBook.bookDescription = bookDescription
                 newBook.isFavorite = isFavorite
-                print("Added new book with ID: \(id)")
             }
             saveContext()
         } catch {
@@ -145,6 +144,23 @@ class CoreDataManager {
             return []
         }
     }
+    
+    func fetchFavoriteBookIDs() -> Set<String> {
+        let request: NSFetchRequest<BookEntity> = BookEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "isFavorite == true")
+        
+        do {
+            let favoriteBooks = try CoreDataManager.shared.context.fetch(request)
+            return Set(favoriteBooks.map { $0.id ?? "" })
+        } catch {
+            print("Failed to fetch favorite book IDs: \(error)")
+            return []
+        }
+    }
+    
+    
+    
+    
     
     // Delete a book
     func deleteBook(book: BookEntity) {

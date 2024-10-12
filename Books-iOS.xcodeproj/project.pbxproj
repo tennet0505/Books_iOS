@@ -22,6 +22,7 @@
 		06958F042CB9E94300895527 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06958EF32CB9E94300895527 /* Main.storyboard */; };
 		06958F062CBA915700895527 /* MyLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958F052CBA915700895527 /* MyLibraryViewController.swift */; };
 		06958F082CBA92D100895527 /* MyLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958F072CBA92C600895527 /* MyLibraryViewModel.swift */; };
+		06958F0D2CBAC2BF00895527 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958F0C2CBAC2BB00895527 /* Constants.swift */; };
 		A6C031351B1E0A34A948397A /* Pods_Books_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01CB6E4A9C00F099FB32D85 /* Pods_Books_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		06958EF62CB9E94300895527 /* Books_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Books_iOS.xcdatamodel; sourceTree = "<group>"; };
 		06958F052CBA915700895527 /* MyLibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewController.swift; sourceTree = "<group>"; };
 		06958F072CBA92C600895527 /* MyLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewModel.swift; sourceTree = "<group>"; };
+		06958F0C2CBAC2BB00895527 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		06BD0C062CB937070083540E /* Books-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Books-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0826AAE7DCD0A38EC20DDB80 /* Pods-Books-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books-iOS.release.xcconfig"; path = "Target Support Files/Pods-Books-iOS/Pods-Books-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7FBE2EE769C56E7A8336435A /* Pods-Books-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Books-iOS/Pods-Books-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		06958EF52CB9E94300895527 /* Books-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				06958F0B2CBAC2AB00895527 /* Helpers */,
 				06958EE12CB9E94300895527 /* DB */,
 				06958EE32CB9E94300895527 /* Models */,
 				06958EE52CB9E94300895527 /* Network */,
@@ -121,6 +124,14 @@
 				06958EF42CB9E94300895527 /* SceneDelegate.swift */,
 			);
 			path = "Books-iOS";
+			sourceTree = "<group>";
+		};
+		06958F0B2CBAC2AB00895527 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				06958F0C2CBAC2BB00895527 /* Constants.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		06BD0BFD2CB937070083540E = {
@@ -280,6 +291,7 @@
 				06958EFB2CB9E94300895527 /* BookCell.swift in Sources */,
 				06958EFC2CB9E94300895527 /* DetailsViewController.swift in Sources */,
 				06958F082CBA92D100895527 /* MyLibraryViewModel.swift in Sources */,
+				06958F0D2CBAC2BF00895527 /* Constants.swift in Sources */,
 				06958EFD2CB9E94300895527 /* MainViewController.swift in Sources */,
 				06958EFE2CB9E94300895527 /* AppDelegate.swift in Sources */,
 				06958F062CBA915700895527 /* MyLibraryViewController.swift in Sources */,

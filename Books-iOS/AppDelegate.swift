@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SVProgressHUD
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        SVProgressHUD.setMaximumDismissTimeInterval(TimeInterval(2))
+        SVProgressHUD.setDefaultMaskType(.black)
         return true
     }
 

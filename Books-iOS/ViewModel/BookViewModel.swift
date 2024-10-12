@@ -13,6 +13,7 @@ class BookViewModel: ObservableObject {
     @Published var filteredBooks: [Book] = []
     @Published var searchQuery: String = ""
     @Published var errorMessage: String? = nil
+    @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -20,15 +21,19 @@ class BookViewModel: ObservableObject {
     }
     
     func fetchFavBooks() {
-        let booksFiltered = CoreDataManager.shared.fetchFavoriteBooks().map{ convertToBook($0) }
+        let booksFiltered = CoreDataManager.shared.fetchFavoriteBooks().map { convertToBook($0) }
         books = booksFiltered
         filteredBooks = booksFiltered
     }
     
     func fetchBooks() {
-        APIService().fetchBooks()
+        isLoading = true
+        let existingFavoriteIDs = fetchFavoriteBookIDs()
+
+        APIService.shared.fetchBooks()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
+                self.isLoading = false
                 switch completion {
                 case .finished:
                     // Completed successfully
@@ -37,10 +42,25 @@ class BookViewModel: ObservableObject {
                     self.errorMessage = self.handleError(error)
                 }
             }, receiveValue: { [weak self] books in
-                self?.books = books
-                self?.filteredBooks = books
+                guard let self = self else { return }
+                self.books = books
+                self.filteredBooks = books
+                self.reapplyFavorites(existingFavoriteIDs)
             })
             .store(in: &cancellables)
+    }
+    
+    private func fetchFavoriteBookIDs() -> Set<String> {
+        let booksFiltered = CoreDataManager.shared.fetchFavoriteBooks().map { $0.id ?? "" }
+        return Set(booksFiltered)
+    }
+    
+    private func reapplyFavorites(_ favoriteIDs: Set<String>) {
+        for id in favoriteIDs {
+            if let index = books.firstIndex(where: { $0.id == id }) {
+                books[index].isFavorite = true // Reapply favorite status
+            }
+        }
     }
     
     private func setupBindings() {
@@ -104,9 +124,6 @@ class BookViewModel: ObservableObject {
                     author: bookEntity.author ?? "",
                     imageUrl: bookEntity.imageUrl ?? "",
                     bookDescription: bookEntity.bookDescription ?? "",
-                    isFavorite: bookEntity.isFavorite
-        )
-        // Map other properties as needed
+                    isFavorite: bookEntity.isFavorite)
     }
 }
-

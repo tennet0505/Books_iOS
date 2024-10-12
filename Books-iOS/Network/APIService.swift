@@ -16,12 +16,12 @@ enum APIError: Error {
 
 class APIService {
     static let shared = APIService()
-    private let baseUrl = "https://6708f864af1a3998ba9fdd2f.mockapi.io/api/v1/books"
+    private let url = MyURL.books.url
     
     init() {}
     
     func fetchBooks() -> AnyPublisher<[Book], APIError> {
-        guard let url = URL(string: baseUrl) else {
+        guard let url = URL(string: url) else {
             return Fail(error: APIError.invalidURL).eraseToAnyPublisher()
         }
         
@@ -66,15 +66,16 @@ class APIService {
     }
 
     private func saveBooksToDB(books: [Book]) {
+        let existingFavoriteIDs = CoreDataManager.shared.fetchFavoriteBooks().map { $0.id ?? "" }
         CoreDataManager.shared.removeAllBooks()
         books.forEach { book in
-            print(book)
+            let isFavorite = existingFavoriteIDs.contains(book.id)
             CoreDataManager.shared.addOrUpdateBook(id: book.id,
                                            title: book.title,
                                            author: book.author,
                                            imageUrl: book.imageUrl,
                                            bookDescription: book.bookDescription,
-                                           isFavorite: book.isFavorite ?? false)
+                                           isFavorite: isFavorite)
         }
     }
 }

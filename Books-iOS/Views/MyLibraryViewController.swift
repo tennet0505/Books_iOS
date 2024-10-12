@@ -39,10 +39,12 @@ class MyLibraryViewController: UIViewController {
     
     private func setupBindings() {
         viewModel.$filteredBooks
-            .sink { [weak self] _ in
+            .sink { [weak self] books in
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
+                self?.searchBar.isHidden = books.isEmpty
+                self?.collectionView.isHidden = books.isEmpty
             }
             .store(in: &cancellables)
         
