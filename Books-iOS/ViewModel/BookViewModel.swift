@@ -15,8 +15,10 @@ class BookViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
+    var apiService: APIServiceProtocol
     
-    init() {
+    init(apiService: APIServiceProtocol = APIService()) {
+        self.apiService = apiService
         setupBindings()
     }
     
@@ -30,7 +32,7 @@ class BookViewModel: ObservableObject {
         isLoading = true
         let existingFavoriteIDs = fetchFavoriteBookIDs()
 
-        APIService.shared.fetchBooks()
+        apiService.fetchBooks()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 self.isLoading = false

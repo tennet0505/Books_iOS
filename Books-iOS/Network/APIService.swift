@@ -14,7 +14,11 @@ enum APIError: Error {
     case decodingFailed
 }
 
-class APIService {
+protocol APIServiceProtocol {
+    func fetchBooks() -> AnyPublisher<[Book], APIError>
+}
+
+class APIService: APIServiceProtocol {
     static let shared = APIService()
     private let url = MyURL.books.url
     
