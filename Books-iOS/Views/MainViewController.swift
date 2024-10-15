@@ -120,10 +120,10 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.collectionView {
-            return CGSize(width: 200, height: 300)
+            return CGSize(width: 160, height: 270)
         }
         if collectionView == self.newBooksCollectionView {
-            return CGSize(width: 150, height: 200)
+            return CGSize(width: 150, height: 150)
         }
         return CGSize(width: 0, height: 0)
     }

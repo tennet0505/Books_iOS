@@ -20,6 +20,7 @@ class MyLibraryViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cancelButton.isHidden = true
         searchBar.delegate = self
         setupCollectionView()
         setupBindings()
@@ -44,9 +45,7 @@ class MyLibraryViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
-                self?.searchBar.isHidden = books.isEmpty
                 self?.collectionView.isHidden = books.isEmpty
-                self?.cancelButton.isHidden = books.isEmpty
             }
             .store(in: &cancellables)
         
@@ -93,6 +92,7 @@ extension MyLibraryViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     @IBAction func cancelButtonAction(_ sender: Any) {
+        cancelButton.isHidden = true
         searchBar.text = ""
         viewModel.searchQuery = ""
         view.endEditing(true)
@@ -106,10 +106,18 @@ extension MyLibraryViewController: UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        
+        cancelButton.isHidden = true
         if let query = searchBar.text, !query.isEmpty {
             performSearch(for: query)
         }
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        cancelButton.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        cancelButton.isHidden = true
     }
     
     func performSearch(for query: String) {

@@ -13,6 +13,7 @@ class SearchViewController: BaseViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cancelButton: UIButton!
     
     private let viewModel = SearchViewModel()
     private var cancellables = Set<AnyCancellable>()
@@ -20,6 +21,7 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cancelButton.isHidden = true
         searchBar.delegate = self
         searchBar.returnKeyType = .search
         setupBindings()
@@ -60,6 +62,7 @@ class SearchViewController: BaseViewController {
     @IBAction func cancelButtonAction(_ sender: Any) {
         searchBar.text = ""
         viewModel.searchQuery = ""
+        cancelButton.isHidden = true
         view.endEditing(true)
     }
 }
@@ -90,10 +93,18 @@ extension SearchViewController: UISearchBarDelegate {
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        
+        cancelButton.isHidden = true
         if let query = searchBar.text, !query.isEmpty {
             performSearch(for: query)
         }
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        cancelButton.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        cancelButton.isHidden = true
     }
     
     func performSearch(for query: String) {
