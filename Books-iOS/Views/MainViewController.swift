@@ -12,8 +12,9 @@ import SVProgressHUD
 class MainViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var newBooksCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
     private let viewModel = BookViewModel()
     private var cancellables = Set<AnyCancellable>()
         
@@ -23,18 +24,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         searchBar.delegate = self
-        setupCollectionView()
         setupBindings()
         viewModel.fetchBooks()
         
-    }
-    
-    func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 5
-        collectionView.setCollectionViewLayout(layout, animated: true)
     }
     
     private func setupBindings() {
@@ -42,6 +34,7 @@ class MainViewController: UIViewController {
             .sink { [weak self] _ in
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
+                    self?.newBooksCollectionView.reloadData()
                 }
             }
             .store(in: &cancellables)
@@ -79,13 +72,28 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.filteredBooks.count
+        if collectionView == self.collectionView {
+           return  viewModel.filteredBooks.count
+        }
+        if collectionView == self.newBooksCollectionView {
+            return viewModel.filteredBooks.count
+        }
+        return 0
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
-        cell.configure(with: viewModel.filteredBooks[indexPath.row])
-        return cell
+        if collectionView == self.collectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
+            cell.configure(with: viewModel.filteredBooks[indexPath.row])
+            return cell
+        }
+        if collectionView == self.newBooksCollectionView {
+            let cell = newBooksCollectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
+            cell.configure(with: viewModel.filteredBooks[indexPath.row])
+            return cell
+        }
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -97,10 +105,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let layout = collectionViewLayout as! UICollectionViewFlowLayout
-        let width = collectionView.frame.width / 2 - layout.minimumInteritemSpacing
-        
-        return CGSize(width: width, height: width * 1.5)
+        if collectionView == self.collectionView {
+            return CGSize(width: 200, height: 300)
+        }
+        if collectionView == self.newBooksCollectionView {
+            return CGSize(width: 200, height: 200)
+        }
+        return CGSize(width: 0, height: 0)
     }
 }
 

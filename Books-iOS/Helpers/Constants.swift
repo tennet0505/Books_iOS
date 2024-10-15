@@ -9,15 +9,15 @@ import Foundation
 
 enum MyURL {
     case books
-    case bestSellers
+    case allBooks
     case authors
 
     var url: String {
         switch self {
         case .books:
             return "\(API.baseURL)books"
-        case .bestSellers:
-            return "\(API.baseURL)best-sellers"
+        case .allBooks:
+            return "\(API.baseURL)allBooks"
         case .authors:
             return "\(API.baseURL)authors"
         }
