@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct BooksResponse: Decodable {
+    var popularBooks: [Book]
+    var newBooks: [Book]
+}
+
 struct Book: Decodable {
     var id: String
     var title: String
@@ -14,5 +19,6 @@ struct Book: Decodable {
     var imageUrl: String
     var bookDescription: String
     var isFavorite: Bool? = false
+    var isPopular: Bool = false
+    var pdfUrl: String
 }
-

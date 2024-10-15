@@ -8,12 +8,13 @@
 import UIKit
 import Combine
 
-class MyLibraryViewController: UIViewController {
+class MyLibraryViewController: BaseViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    private let viewModel = BookViewModel()
+    @IBOutlet weak var cancelButton: UIButton!
+
+    private let viewModel = MyLibraryViewModel()
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -26,7 +27,7 @@ class MyLibraryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchFavBooks()
+        viewModel.fetchBooks()
     }
     
     func setupCollectionView() {
@@ -45,6 +46,7 @@ class MyLibraryViewController: UIViewController {
                 }
                 self?.searchBar.isHidden = books.isEmpty
                 self?.collectionView.isHidden = books.isEmpty
+                self?.cancelButton.isHidden = books.isEmpty
             }
             .store(in: &cancellables)
         
@@ -57,15 +59,10 @@ class MyLibraryViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
+        collectionView.endEditing(true)
     }
 }
 
@@ -94,10 +91,28 @@ extension MyLibraryViewController: UICollectionViewDataSource, UICollectionViewD
         
         return CGSize(width: width, height: width * 1.5)
     }
+    
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        searchBar.text = ""
+        viewModel.searchQuery = ""
+        view.endEditing(true)
+    }
 }
 
 extension MyLibraryViewController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchQuery = searchText
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        if let query = searchBar.text, !query.isEmpty {
+            performSearch(for: query)
+        }
+    }
+    
+    func performSearch(for query: String) {
+        viewModel.searchQuery = query
     }
 }

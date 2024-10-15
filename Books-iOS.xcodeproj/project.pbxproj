@@ -11,7 +11,6 @@
 		06958EF82CB9E94300895527 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EE22CB9E94300895527 /* Book.swift */; };
 		06958EF92CB9E94300895527 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EE42CB9E94300895527 /* APIService.swift */; };
 		06958EFA2CB9E94300895527 /* BookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EE62CB9E94300895527 /* BookViewModel.swift */; };
-		06958EFB2CB9E94300895527 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EE82CB9E94300895527 /* BookCell.swift */; };
 		06958EFC2CB9E94300895527 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EE92CB9E94300895527 /* DetailsViewController.swift */; };
 		06958EFD2CB9E94300895527 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EEA2CB9E94300895527 /* MainViewController.swift */; };
 		06958EFE2CB9E94300895527 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958EEC2CB9E94300895527 /* AppDelegate.swift */; };
@@ -23,6 +22,10 @@
 		06958F062CBA915700895527 /* MyLibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958F052CBA915700895527 /* MyLibraryViewController.swift */; };
 		06958F082CBA92D100895527 /* MyLibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958F072CBA92C600895527 /* MyLibraryViewModel.swift */; };
 		06958F0D2CBAC2BF00895527 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06958F0C2CBAC2BB00895527 /* Constants.swift */; };
+		06AEEFEE2CBE8CE600E6C2A7 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFED2CBE8CE200E6C2A7 /* Extentions.swift */; };
+		06AEEFF02CBE8DDA00E6C2A7 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFEF2CBE8DD300E6C2A7 /* SearchViewModel.swift */; };
+		06AEEFF22CBE966900E6C2A7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */; };
+		06AEEFFD2CBE9A4300E6C2A7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */; };
 		A6C031351B1E0A34A948397A /* Pods_Books_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01CB6E4A9C00F099FB32D85 /* Pods_Books_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +44,6 @@
 		06958EE22CB9E94300895527 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		06958EE42CB9E94300895527 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		06958EE62CB9E94300895527 /* BookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookViewModel.swift; sourceTree = "<group>"; };
-		06958EE82CB9E94300895527 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		06958EE92CB9E94300895527 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		06958EEA2CB9E94300895527 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		06958EEC2CB9E94300895527 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,10 @@
 		06958F072CBA92C600895527 /* MyLibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryViewModel.swift; sourceTree = "<group>"; };
 		06958F0C2CBAC2BB00895527 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		06958F142CBAD7C900895527 /* Books-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Books-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		06AEEFED2CBE8CE200E6C2A7 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		06AEEFEF2CBE8DD300E6C2A7 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		06BD0C062CB937070083540E /* Books-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Books-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0826AAE7DCD0A38EC20DDB80 /* Pods-Books-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books-iOS.release.xcconfig"; path = "Target Support Files/Pods-Books-iOS/Pods-Books-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7FBE2EE769C56E7A8336435A /* Pods-Books-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Books-iOS/Pods-Books-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		06958F152CBAD7C900895527 /* Books-iOSTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "Books-iOSTests"; sourceTree = "<group>"; };
+		06AEEFF32CBE967300E6C2A7 /* Cells */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Cells; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +118,7 @@
 		06958EE72CB9E94300895527 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				06AEEFEF2CBE8DD300E6C2A7 /* SearchViewModel.swift */,
 				06958F072CBA92C600895527 /* MyLibraryViewModel.swift */,
 				06958EE62CB9E94300895527 /* BookViewModel.swift */,
 			);
@@ -120,10 +128,12 @@
 		06958EEB2CB9E94300895527 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				06958EE82CB9E94300895527 /* BookCell.swift */,
+				06AEEFF32CBE967300E6C2A7 /* Cells */,
 				06958EE92CB9E94300895527 /* DetailsViewController.swift */,
 				06958EEA2CB9E94300895527 /* MainViewController.swift */,
 				06958F052CBA915700895527 /* MyLibraryViewController.swift */,
+				06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */,
+				06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,6 +161,7 @@
 		06958F0B2CBAC2AB00895527 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				06AEEFED2CBE8CE200E6C2A7 /* Extentions.swift */,
 				06958F0C2CBAC2BB00895527 /* Constants.swift */,
 			);
 			path = Helpers;
@@ -232,6 +243,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				06AEEFF32CBE967300E6C2A7 /* Cells */,
 			);
 			name = "Books-iOS";
 			productName = "Books-iOS";
@@ -353,9 +367,12 @@
 				06958EF72CB9E94300895527 /* CoreData.swift in Sources */,
 				06958EF82CB9E94300895527 /* Book.swift in Sources */,
 				06958EF92CB9E94300895527 /* APIService.swift in Sources */,
+				06AEEFFD2CBE9A4300E6C2A7 /* BaseViewController.swift in Sources */,
 				06958EFA2CB9E94300895527 /* BookViewModel.swift in Sources */,
-				06958EFB2CB9E94300895527 /* BookCell.swift in Sources */,
 				06958EFC2CB9E94300895527 /* DetailsViewController.swift in Sources */,
+				06AEEFF02CBE8DDA00E6C2A7 /* SearchViewModel.swift in Sources */,
+				06AEEFF22CBE966900E6C2A7 /* SearchViewController.swift in Sources */,
+				06AEEFEE2CBE8CE600E6C2A7 /* Extentions.swift in Sources */,
 				06958F082CBA92D100895527 /* MyLibraryViewModel.swift in Sources */,
 				06958F0D2CBAC2BF00895527 /* Constants.swift in Sources */,
 				06958EFD2CB9E94300895527 /* MainViewController.swift in Sources */,

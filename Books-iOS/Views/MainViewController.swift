@@ -9,16 +9,14 @@ import UIKit
 import Combine
 import SVProgressHUD
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var newBooksCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-
-    private let viewModel = BookViewModel()
-    private var cancellables = Set<AnyCancellable>()
-        
     
+    private let viewModel = BookViewModel()
+    private var cancellables = Set<AnyCancellable>()    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +28,17 @@ class MainViewController: UIViewController {
     }
     
     private func setupBindings() {
-        viewModel.$filteredBooks
+        viewModel.$popularBooks
             .sink { [weak self] _ in
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
+                }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$newBooks
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
                     self?.newBooksCollectionView.reloadData()
                 }
             }
@@ -58,10 +63,8 @@ class MainViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-    private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+    @IBAction func searchButton(_ sender: Any) {
+        tabBarController?.selectedIndex = 2
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,10 +76,10 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionView {
-           return  viewModel.filteredBooks.count
+            return  viewModel.popularBooks.count
         }
         if collectionView == self.newBooksCollectionView {
-            return viewModel.filteredBooks.count
+            return viewModel.newBooks.count
         }
         return 0
     }
@@ -85,23 +88,30 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
-            cell.configure(with: viewModel.filteredBooks[indexPath.row])
+            cell.configure(with: viewModel.popularBooks[indexPath.row])
             return cell
         }
         if collectionView == self.newBooksCollectionView {
             let cell = newBooksCollectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
-            cell.configure(with: viewModel.filteredBooks[indexPath.row])
+            cell.configure(with: viewModel.newBooks[indexPath.row])
             return cell
         }
         return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let book = viewModel.filteredBooks[indexPath.row]
         let storyboard =  UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        vc.bookId = book.id
-        self.navigationController?.pushViewController(vc, animated: true)
+        if collectionView == self.collectionView {
+            let book = viewModel.popularBooks[indexPath.row]
+            vc.bookId = book.id
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if collectionView == self.newBooksCollectionView {
+            let book = viewModel.newBooks[indexPath.row]
+            vc.bookId = book.id
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -109,7 +119,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return CGSize(width: 200, height: 300)
         }
         if collectionView == self.newBooksCollectionView {
-            return CGSize(width: 200, height: 200)
+            return CGSize(width: 150, height: 200)
         }
         return CGSize(width: 0, height: 0)
     }
@@ -117,7 +127,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel.searchQuery = searchText
+
     }
 }
 

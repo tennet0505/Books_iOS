@@ -59,7 +59,9 @@ class APIService: APIServiceProtocol {
                     author: bookEntity.author ?? "",
                     imageUrl: bookEntity.imageUrl ?? "",
                     bookDescription: bookEntity.bookDescription ?? "",
-                    isFavorite: bookEntity.isFavorite
+                    isFavorite: bookEntity.isFavorite,
+                    isPopular: bookEntity.isPopular, 
+                    pdfUrl: bookEntity.pdfUrl ?? ""
                 )
             }
             
@@ -75,11 +77,13 @@ class APIService: APIServiceProtocol {
         books.forEach { book in
             let isFavorite = existingFavoriteIDs.contains(book.id)
             CoreDataManager.shared.addOrUpdateBook(id: book.id,
-                                           title: book.title,
-                                           author: book.author,
-                                           imageUrl: book.imageUrl,
-                                           bookDescription: book.bookDescription,
-                                           isFavorite: isFavorite)
+                                                   title: book.title,
+                                                   author: book.author,
+                                                   imageUrl: book.imageUrl,
+                                                   bookDescription: book.bookDescription,
+                                                   isFavorite: isFavorite,
+                                                   pdfUrl: book.pdfUrl,
+                                                   isPopular: book.isPopular)
         }
     }
 }

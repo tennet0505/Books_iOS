@@ -1,17 +1,17 @@
 //
-//  ViewModel.swift
+//  SearchViewModel.swift
 //  Books-iOS
 //
-//  Created by Oleg Ten on 11/10/2024.
+//  Created by Oleg Ten on 15/10/2024.
 //
 
 import Foundation
 import Combine
 
-class BookViewModel: ObservableObject {
+class SearchViewModel: ObservableObject {
     @Published var books: [Book] = []
-    @Published var popularBooks: [Book] = []
-    @Published var newBooks: [Book] = []
+    @Published var filteredBooks: [Book] = []
+    @Published var searchQuery: String = ""
     @Published var errorMessage: String? = nil
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
@@ -19,9 +19,15 @@ class BookViewModel: ObservableObject {
     
     init(apiService: APIServiceProtocol = APIService()) {
         self.apiService = apiService
+        setupBindings()
     }
     
-   
+    func fetchFavBooks() {
+        let booksFiltered = CoreDataManager.shared.fetchFavoriteBooks().map { $0.convertToBook() }
+        books = booksFiltered
+        filteredBooks = booksFiltered
+    }
+    
     func fetchBooks() {
         isLoading = true
         let existingFavoriteIDs = fetchFavoriteBookIDs()
@@ -40,22 +46,10 @@ class BookViewModel: ObservableObject {
             }, receiveValue: { [weak self] books in
                 guard let self = self else { return }
                 self.books = books
+                self.filteredBooks = books
                 self.reapplyFavorites(existingFavoriteIDs)
-                self.filterAllBooks()
             })
             .store(in: &cancellables)
-    }
-    
-    private func filterAllBooks() {
-        let popularBooksFiltered = CoreDataManager.shared.fetchBooks()
-            .filter{ $0.isPopular }
-            .map { $0.convertToBook() }
-            
-        let newBooksFiltered = CoreDataManager.shared.fetchBooks()
-            .filter{ !$0.isPopular }
-            .map { $0.convertToBook() }
-        popularBooks = popularBooksFiltered
-        newBooks = newBooksFiltered
     }
     
     private func fetchFavoriteBookIDs() -> Set<String> {
@@ -71,6 +65,28 @@ class BookViewModel: ObservableObject {
         }
     }
     
+    private func setupBindings() {
+        $searchQuery
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                self?.filterBooks(query: query)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func filterBooks(query: String) {
+        if query.isEmpty {
+            filteredBooks = books
+        } else {
+            filteredBooks = books.filter { book in
+                let titleMatches = book.title.lowercased().contains(query.lowercased())
+                let authorMatches = book.author.lowercased().contains(query.lowercased())
+                return titleMatches || authorMatches
+            }
+        }
+    }
+    
     func toggleFavoriteStatus(for book: Book) {
         let updatedBook = book
         
@@ -80,6 +96,7 @@ class BookViewModel: ObservableObject {
         // Update the local books array
         if let index = books.firstIndex(where: { $0.id == book.id }) {
             books[index] = updatedBook
+            filteredBooks[index] = updatedBook
         }
     }
     
@@ -102,4 +119,6 @@ class BookViewModel: ObservableObject {
             return "Failed to decode response."
         }
     }
+    
 }
+

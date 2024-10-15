@@ -10,7 +10,7 @@ import Combine
 import SwiftUICore
 
 class MyLibraryViewModel: ObservableObject {
-    @Published var favoriteBooks: [Book] = []
+    @Published var books: [Book] = []
     @Published var filteredBooks: [Book] = []
     @Published var searchQuery: String = ""
     @Published var errorMessage: String? = nil
@@ -22,9 +22,9 @@ class MyLibraryViewModel: ObservableObject {
     }
     
     func fetchBooks() {
-        let books = CoreDataManager.shared.fetchFavoriteBooks().map{ convertToBook($0) }
-        favoriteBooks = books
-        filteredBooks = books
+        let allBooks = CoreDataManager.shared.fetchBooks().map{ $0.convertToBook() }
+        books = allBooks
+        filteredBooks = allBooks
     }
     
     private func setupBindings() {
@@ -39,9 +39,9 @@ class MyLibraryViewModel: ObservableObject {
     
     private func filterBooks(query: String) {
         if query.isEmpty {
-            filteredBooks = favoriteBooks
+            filteredBooks = books
         } else {
-            filteredBooks = favoriteBooks.filter { book in
+            filteredBooks = books.filter { book in
                 let titleMatches = book.title.lowercased().contains(query.lowercased())
                 let authorMatches = book.author.lowercased().contains(query.lowercased())
                 return titleMatches || authorMatches
@@ -56,8 +56,8 @@ class MyLibraryViewModel: ObservableObject {
         CoreDataManager.shared.updateBook(book: updatedBook, isFavorite: updatedBook.isFavorite ?? false)
         
         // Update the local books array
-        if let index = favoriteBooks.firstIndex(where: { $0.id == book.id }) {
-            favoriteBooks[index] = updatedBook
+        if let index = books.firstIndex(where: { $0.id == book.id }) {
+            books[index] = updatedBook
             filteredBooks[index] = updatedBook
         }
         
@@ -67,7 +67,7 @@ class MyLibraryViewModel: ObservableObject {
     func fetchBookById(_ id: String) -> Book? {
         if let bookEntity = CoreDataManager.shared.fetchBookByID(id) {
             print(bookEntity)
-            return convertToBook(bookEntity)
+            return bookEntity.convertToBook()
         } else {
             return nil
         }
@@ -82,16 +82,5 @@ class MyLibraryViewModel: ObservableObject {
         case .decodingFailed:
             return "Failed to decode response."
         }
-    }
-    
-    func convertToBook(_ bookEntity: BookEntity) -> Book {
-        return Book(id: bookEntity.id ?? "",
-                    title: bookEntity.title ?? "",
-                    author: bookEntity.author ?? "",
-                    imageUrl: bookEntity.imageUrl ?? "",
-                    bookDescription: bookEntity.bookDescription ?? "",
-                    isFavorite: bookEntity.isFavorite
-        )
-        // Map other properties as needed
     }
 }

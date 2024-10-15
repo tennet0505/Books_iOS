@@ -53,7 +53,7 @@ class CoreDataManager {
     }
     
     // Add or update a book
-    func addOrUpdateBook(id: String, title: String, author: String, imageUrl: String, bookDescription: String, isFavorite: Bool) {
+    func addOrUpdateBook(id: String, title: String, author: String, imageUrl: String, bookDescription: String, isFavorite: Bool, pdfUrl: String, isPopular: Bool) {
         let fetchRequest: NSFetchRequest<BookEntity> = BookEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
 
@@ -67,6 +67,9 @@ class CoreDataManager {
                 existingBook.imageUrl = imageUrl
                 existingBook.bookDescription = bookDescription
                 existingBook.isFavorite = isFavorite
+                existingBook.isPopular = isPopular
+                existingBook.pdfUrl = pdfUrl
+                
                 print("Updated book with ID: \(id)")
             } else {
                 // Add new book
@@ -77,6 +80,8 @@ class CoreDataManager {
                 newBook.imageUrl = imageUrl
                 newBook.bookDescription = bookDescription
                 newBook.isFavorite = isFavorite
+                newBook.isPopular = isPopular
+                newBook.pdfUrl = pdfUrl
             }
             saveContext()
         } catch {

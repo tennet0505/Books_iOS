@@ -6,6 +6,8 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageUrl" optional="YES" attributeType="String"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isPopular" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="pdfUrl" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
 </model>
