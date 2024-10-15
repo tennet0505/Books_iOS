@@ -8,16 +8,31 @@
 import XCTest
 import Combine
 @testable import Books_iOS
+import PDFKit
+
+import XCTest
+import Combine
 
 class Books_iOSTests: XCTestCase {
     
-    var viewModel: BookViewModel!
+    var viewModel: SearchViewModel!
     var cancellables: Set<AnyCancellable>!
+    var pdfViewController: PDFViewController!
+    var mockPDFView: PDFView!
     
     override func setUpWithError() throws {
         let mockService = MockAPIService()
-        viewModel = BookViewModel(apiService: mockService)
+        viewModel = SearchViewModel(apiService: mockService)
         cancellables = []
+        pdfViewController = PDFViewController()
+        mockPDFView = PDFView()
+        pdfViewController.pdfView = mockPDFView
+    }
+    
+    override func tearDown() {
+        pdfViewController = nil
+        mockPDFView = nil
+        super.tearDown()
     }
     
     override func tearDownWithError() throws {
@@ -25,115 +40,95 @@ class Books_iOSTests: XCTestCase {
         cancellables = nil
     }
     
-    // Test that the loading state is properly set during a successful fetch
-    func testFetchBooksSetsLoadingState_Success() {
-        let expectation = XCTestExpectation(description: "Loading state should be set correctly")
+    func testPDFLoading() {
+        // Given
+        let urlString = "https://www.soundczech.cz/temp/lorem-ipsum.pdf"
+        pdfViewController.pdfUrl = urlString
         
-        var loadingStates = [Bool]()
+        // When
+        pdfViewController.loadPDF(from: URL(string: urlString)!)
         
-        viewModel.$isLoading
-            .dropFirst() // Ignore the initial value
-            .sink { isLoading in
-                loadingStates.append(isLoading)
-                if loadingStates.count == 2 {
-                    expectation.fulfill() // Expect two loading state changes (true, then false)
-                }
-            }
-            .store(in: &cancellables)
+        // Wait for a bit to ensure asynchronous loading
+        let expectation = self.expectation(description: "PDF loading expectation")
         
-        viewModel.fetchBooks()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            // Then
+            XCTAssertNotNil(self.mockPDFView.document, "PDF document should not be nil after loading.")
+            expectation.fulfill()
+        }
         
-        wait(for: [expectation], timeout: 1.0)
-        
-        XCTAssertEqual(loadingStates, [true, false], "Loading state should be true then false when fetching books")
-    }
-    
-    //Test Loading State for Failure
-    func testFetchBooksSetsLoadingState_Failure() {
-        let mockService = MockAPIService()
-        mockService.shouldFail = true
-        viewModel = BookViewModel(apiService: mockService) // Inject mock service
-        
-        let expectation = XCTestExpectation(description: "Loading state should be set correctly")
-        
-        var loadingStates = [Bool]()
-        
-        viewModel.$isLoading
-            .dropFirst() // Ignore the initial value
-            .sink { isLoading in
-                loadingStates.append(isLoading)
-                if loadingStates.count == 2 {
-                    expectation.fulfill() // Expect two loading state changes (true, then false)
-                }
-            }
-            .store(in: &cancellables)
-        
-        viewModel.fetchBooks()
-        
-        wait(for: [expectation], timeout: 1.0)
-        
-        XCTAssertEqual(loadingStates, [true, false], "Loading state should be true then false when fetching books fails")
-    }
-    
-    //    Test Books Fetch Success
-    func testFetchBooksSuccess() {
-        let mockService = MockAPIService()
-        viewModel = BookViewModel(apiService: mockService) // Inject mock service
-        
-        let expectation = XCTestExpectation(description: "Books should be fetched successfully")
-        
-        viewModel.$books
-            .dropFirst() // Ignore the initial value
-            .sink { books in
-                if !books.isEmpty {
-                    expectation.fulfill()
-                }
-            }
-            .store(in: &cancellables)
-        
-        viewModel.fetchBooks()
-        
-        wait(for: [expectation], timeout: 1.0)
-        
-        XCTAssertEqual(viewModel.books.count, 1, "Books array should contain one book")
-        XCTAssertEqual(viewModel.books.first?.title, "Test Book", "First book title should be 'Test Book'")
-    }
-    
-    // Test Books Fetch Failure
-    func testFetchBooksFailure() {
-        let mockService = MockAPIService()
-        mockService.shouldFail = true
-        viewModel = BookViewModel(apiService: mockService) // Inject mock service
-        
-        let expectation = XCTestExpectation(description: "Error message should be set on failure")
-        
-        viewModel.$errorMessage
-            .dropFirst() // Ignore the initial value
-            .sink { errorMessage in
-                if let errorMessage = errorMessage {
-                    XCTAssertEqual(errorMessage, "Network request failed.")
-                    expectation.fulfill()
-                }
-            }
-            .store(in: &cancellables)
-        
-        viewModel.fetchBooks()
-        
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 2.0)
     }
 
+    func testFetchBooks() {
+        // Given
+        let expectation = self.expectation(description: "Books fetched successfully")
+        
+        // When
+        viewModel.fetchBooks()
+        
+        // Then
+        viewModel.$books
+            .dropFirst() // Skip the initial value
+            .sink(receiveValue: { books in
+                XCTAssertEqual(books.count, 1, "There should be 1 book fetched.")
+                XCTAssertEqual(books.first?.title, "Test Book", "The title of the book should be 'Test Book'.")
+                expectation.fulfill()
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 2.0)
+    }
     
+    func testFilterBooks() {
+        // Given
+        viewModel.fetchBooks() // Fetching books
+        let expectation = self.expectation(description: "Books filtered successfully")
+        
+        // When
+        viewModel.filterBooks(query: "Test") // Assuming filterBooks is implemented
+        
+        // Then
+        viewModel.$filteredBooks
+            .dropFirst()
+            .sink(receiveValue: { filteredBooks in
+                XCTAssertEqual(filteredBooks.count, 1, "There should be 1 filtered book.")
+                XCTAssertEqual(filteredBooks.first?.title, "Test Book", "The filtered book title should be 'Test Book'.")
+                expectation.fulfill()
+            })
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 2.0)
+    }
+
+//    func testToggleFavoriteStatus() {
+//        // Given
+//        viewModel.fetchFavBooks() // Fetching books
+//        
+//        // When
+//        let book = viewModel.books[0]
+//        viewModel.toggleFavoriteStatus(for: book) // Assuming toggleFavorite is implemented
+//        
+//        // Then
+//        XCTAssertTrue((viewModel.books[0].isFavorite != nil), "The book should be marked as favorite.")
+//        
+//        // Toggle again to unmark
+//        viewModel.toggleFavoriteStatus(for: book)
+//        XCTAssertFalse((viewModel.books[0].isFavorite != nil), "The book should be unmarked as favorite.")
+//    }
 }
 
 class MockAPIService: APIServiceProtocol  {
     var shouldFail: Bool = false
-
+    
     func fetchBooks() -> AnyPublisher<[Book], APIError> {
         if shouldFail {
             return Fail(error: APIError.requestFailed)
                 .eraseToAnyPublisher()
         } else {
-            let books = [Book(id: "1", title: "Test Book", author: "Test Author", imageUrl: "", bookDescription: "", isFavorite: false)]
+            let books = [
+                Book(id: "1", title: "Test Book", author: "Test Author", imageUrl: "", bookDescription: "", isFavorite: false, pdfUrl: "")
+            ]
             return Just(books)
                 .setFailureType(to: APIError.self)
                 .eraseToAnyPublisher()

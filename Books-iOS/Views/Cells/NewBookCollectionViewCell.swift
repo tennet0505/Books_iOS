@@ -1,14 +1,13 @@
 //
-//  BookCollectionViewCell.swift
+//  NewBookCollectionViewCell.swift
 //  Books-iOS
 //
-//  Created by Oleg Ten on 11/10/2024.
+//  Created by Oleg Ten on 15/10/2024.
 //
 
 import UIKit
-import Kingfisher
 
-class BookCell: UICollectionViewCell {
+class NewBookCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var author: UILabel!

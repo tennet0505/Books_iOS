@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import PDFKit
 
 class DetailsViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var bestNewLabel: UILabel!
+    @IBOutlet weak var readBookButton: UIButton!
     
     private let viewModel = BookViewModel()
     var bookId: String?
@@ -38,6 +40,7 @@ class DetailsViewController: UIViewController {
         bestNewLabel.text = (book?.isPopular ?? false) ? "Popular" : "New"
         bookTitle.text = book?.title
         authorLabel.text = book?.author
+        readBookButton.isHidden = !isFavorite
         setupFavoriteButton()
     }
     
@@ -47,7 +50,14 @@ class DetailsViewController: UIViewController {
         setupFavoriteButton()
         var favoriteBook = book
         favoriteBook.isFavorite = isFavorite
-        viewModel.toggleFavoriteStatus(for: favoriteBook)        
+        viewModel.toggleFavoriteStatus(for: favoriteBook)
+    }
+    
+    @IBAction func readButtonAction(_ sender: Any) {
+        let pdfVC = storyboard?.instantiateViewController(withIdentifier: "PDFViewController") as! PDFViewController
+        let urlString = book?.pdfUrl ?? ""
+        pdfVC.pdfUrl = urlString
+        self.present(pdfVC, animated: true, completion: nil)
     }
     
     func setupFavoriteButton() {
@@ -55,7 +65,5 @@ class DetailsViewController: UIViewController {
         let heartImage = UIImage(systemName: imageName)
         favButton.setImage(heartImage, for: .normal)
         favButton.tintColor = isFavorite ? .red : .gray
-       
     }
-    
 }

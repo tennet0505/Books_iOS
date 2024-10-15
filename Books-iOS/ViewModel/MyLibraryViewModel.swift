@@ -22,7 +22,7 @@ class MyLibraryViewModel: ObservableObject {
     }
     
     func fetchBooks() {
-        let allBooks = CoreDataManager.shared.fetchBooks().map{ $0.convertToBook() }
+        let allBooks = CoreDataManager.shared.fetchFavoriteBooks().map{ $0.convertToBook() }
         books = allBooks
         filteredBooks = allBooks
     }

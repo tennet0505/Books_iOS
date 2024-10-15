@@ -26,6 +26,7 @@
 		06AEEFF02CBE8DDA00E6C2A7 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFEF2CBE8DD300E6C2A7 /* SearchViewModel.swift */; };
 		06AEEFF22CBE966900E6C2A7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */; };
 		06AEEFFD2CBE9A4300E6C2A7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */; };
+		06AEF0032CBEC19C00E6C2A7 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06AEF0022CBEC19C00E6C2A7 /* PDFViewController.swift */; };
 		A6C031351B1E0A34A948397A /* Pods_Books_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01CB6E4A9C00F099FB32D85 /* Pods_Books_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		06AEEFEF2CBE8DD300E6C2A7 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		06AEF0022CBEC19C00E6C2A7 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		06BD0C062CB937070083540E /* Books-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Books-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0826AAE7DCD0A38EC20DDB80 /* Pods-Books-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books-iOS.release.xcconfig"; path = "Target Support Files/Pods-Books-iOS/Pods-Books-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		7FBE2EE769C56E7A8336435A /* Pods-Books-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Books-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Books-iOS/Pods-Books-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				06958F052CBA915700895527 /* MyLibraryViewController.swift */,
 				06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */,
 				06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */,
+				06AEF0022CBEC19C00E6C2A7 /* PDFViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				06958F082CBA92D100895527 /* MyLibraryViewModel.swift in Sources */,
 				06958F0D2CBAC2BF00895527 /* Constants.swift in Sources */,
 				06958EFD2CB9E94300895527 /* MainViewController.swift in Sources */,
+				06AEF0032CBEC19C00E6C2A7 /* PDFViewController.swift in Sources */,
 				06958EFE2CB9E94300895527 /* AppDelegate.swift in Sources */,
 				06958F062CBA915700895527 /* MyLibraryViewController.swift in Sources */,
 				06958EFF2CB9E94300895527 /* Books_iOS.xcdatamodeld in Sources */,

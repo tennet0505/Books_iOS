@@ -16,13 +16,11 @@ class SearchTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func config(book: Book) {
@@ -30,6 +28,10 @@ class SearchTableViewCell: UITableViewCell {
         bookImageView.kf.setImage(with: url)
         titleLabel.text = book.title
         authorLabel.text = book.author
+        let imageName = book.isFavorite ?? false ? "heart.fill" : "heart"
+        let heartImage = UIImage(systemName: imageName)
+//        favButton.setImage(heartImage, for: .normal)
+//        favButton.tintColor = book.isFavorite ?? false ? .red : .gray
     }
 
 }

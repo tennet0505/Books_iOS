@@ -22,8 +22,8 @@ class BookViewModel: ObservableObject {
     }
     
    
-    func fetchBooks() {
-        isLoading = true
+    func fetchBooks(isLoading: Bool = false) {
+        self.isLoading = isLoading
         let existingFavoriteIDs = fetchFavoriteBookIDs()
         
         apiService.fetchBooks()

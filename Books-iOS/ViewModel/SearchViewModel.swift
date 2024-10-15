@@ -75,7 +75,7 @@ class SearchViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    private func filterBooks(query: String) {
+    func filterBooks(query: String) {
         if query.isEmpty {
             filteredBooks = books
         } else {

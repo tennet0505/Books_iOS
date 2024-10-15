@@ -21,12 +21,16 @@ class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.delegate = self
         setupBindings()
-        viewModel.fetchBooks()
+        viewModel.fetchBooks(isLoading: true)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleFavoriteStatusChanged(_:)), name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
     }
     
+    @objc func handleFavoriteStatusChanged(_ notification: Notification) {
+        viewModel.fetchBooks()
+    }
+        
     private func setupBindings() {
         viewModel.$popularBooks
             .sink { [weak self] _ in
@@ -92,7 +96,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return cell
         }
         if collectionView == self.newBooksCollectionView {
-            let cell = newBooksCollectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
+            let cell = newBooksCollectionView.dequeueReusableCell(withReuseIdentifier: "NewBookCollectionViewCell", for: indexPath) as! NewBookCollectionViewCell
             cell.configure(with: viewModel.newBooks[indexPath.row])
             return cell
         }
@@ -122,12 +126,6 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             return CGSize(width: 150, height: 200)
         }
         return CGSize(width: 0, height: 0)
-    }
-}
-
-extension MainViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
     }
 }
 

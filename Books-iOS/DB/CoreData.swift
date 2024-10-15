@@ -111,8 +111,8 @@ class CoreDataManager {
             let results = try context.fetch(fetchRequest)
             if let bookEntity = results.first {
                 bookEntity.isFavorite = isFavorite
-                print("Updated book with ID: \(bookEntity.id) to isFavorite: \(isFavorite)")
                 try context.save()
+                NotificationCenter.default.post(name: NSNotification.Name("FavoriteStatusChanged"), object: book)
             }
         } catch {
             print("Error updating book: \(error.localizedDescription)")
