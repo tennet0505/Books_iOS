@@ -9,11 +9,11 @@ import UIKit
 import Combine
 
 class MyLibraryViewController: BaseViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var cancelButton: UIButton!
-
+    
     private let viewModel = MyLibraryViewModel()
     private var cancellables = Set<AnyCancellable>()
     

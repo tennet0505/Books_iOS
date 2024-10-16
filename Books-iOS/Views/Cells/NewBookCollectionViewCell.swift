@@ -34,6 +34,6 @@ class NewBookCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func favButtonTapped() {
-            delegate?.didTapFavoriteButton(in: self)
+        delegate?.didTapFavoriteButton(in: self)
     }
 }

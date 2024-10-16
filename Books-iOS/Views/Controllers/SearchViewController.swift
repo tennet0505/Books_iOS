@@ -9,7 +9,6 @@ import UIKit
 import Combine
 
 class SearchViewController: BaseViewController {
-
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -26,14 +25,14 @@ class SearchViewController: BaseViewController {
         searchBar.returnKeyType = .search
         setupBindings()
         viewModel.fetchBooks()
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         searchBar.becomeFirstResponder()
     }
-   
+    
     private func setupBindings() {
         viewModel.$filteredBooks
             .sink { [weak self] books in

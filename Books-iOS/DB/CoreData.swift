@@ -163,10 +163,6 @@ class CoreDataManager {
         }
     }
     
-    
-    
-    
-    
     // Delete a book
     func deleteBook(book: BookEntity) {
         context.delete(book)

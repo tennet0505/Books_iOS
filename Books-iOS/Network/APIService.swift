@@ -60,7 +60,7 @@ class APIService: APIServiceProtocol {
                     imageUrl: bookEntity.imageUrl ?? "",
                     bookDescription: bookEntity.bookDescription ?? "",
                     isFavorite: bookEntity.isFavorite,
-                    isPopular: bookEntity.isPopular, 
+                    isPopular: bookEntity.isPopular,
                     pdfUrl: bookEntity.pdfUrl ?? ""
                 )
             }
@@ -70,7 +70,7 @@ class APIService: APIServiceProtocol {
         .setFailureType(to: APIError.self)
         .eraseToAnyPublisher()
     }
-
+    
     private func saveBooksToDB(books: [Book]) {
         let existingFavoriteIDs = CoreDataManager.shared.fetchFavoriteBooks().map { $0.id ?? "" }
         CoreDataManager.shared.removeAllBooks()

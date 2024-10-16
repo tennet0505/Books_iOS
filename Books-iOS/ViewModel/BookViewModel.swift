@@ -21,7 +21,7 @@ class BookViewModel: ObservableObject {
         self.apiService = apiService
     }
     
-   
+    
     func fetchBooks(isLoading: Bool = false) {
         self.isLoading = isLoading
         let existingFavoriteIDs = fetchFavoriteBookIDs()
@@ -50,7 +50,7 @@ class BookViewModel: ObservableObject {
         let popularBooksFiltered = CoreDataManager.shared.fetchBooks()
             .filter{ $0.isPopular }
             .map { $0.convertToBook() }
-            
+        
         let newBooksFiltered = CoreDataManager.shared.fetchBooks()
             .filter{ !$0.isPopular }
             .map { $0.convertToBook() }
@@ -94,12 +94,12 @@ class BookViewModel: ObservableObject {
     
     func fetchBookGenres() -> [Genre] {
         var genreArray: [Genre] = [Genre(title: "Fantasy", image: "logoGenre"),
-                                Genre(title: "Fantazy", image: "logoGenre"),
-                                Genre(title: "Mystery", image: "logoGenre"),
-                                Genre(title: "Horror", image: "logoGenre"),
-                                Genre(title: "Novel", image: "logoGenre"),
-                                Genre(title: "Biography", image: "logoGenre"),
-                                Genre(title: "Humor", image: "logoGenre")]
+                                   Genre(title: "Fantazy", image: "logoGenre"),
+                                   Genre(title: "Mystery", image: "logoGenre"),
+                                   Genre(title: "Horror", image: "logoGenre"),
+                                   Genre(title: "Novel", image: "logoGenre"),
+                                   Genre(title: "Biography", image: "logoGenre"),
+                                   Genre(title: "Humor", image: "logoGenre")]
         return genreArray
     }
     

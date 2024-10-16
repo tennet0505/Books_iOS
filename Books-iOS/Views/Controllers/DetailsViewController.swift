@@ -10,7 +10,7 @@ import Kingfisher
 import PDFKit
 
 class DetailsViewController: BaseViewController {
-
+    
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -26,8 +26,9 @@ class DetailsViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setup()
+
     }
     
     func setup() {

@@ -28,10 +28,5 @@ class SearchTableViewCell: UITableViewCell {
         bookImageView.kf.setImage(with: url)
         titleLabel.text = book.title
         authorLabel.text = book.author
-        let imageName = book.isFavorite ?? false ? "heart.fill" : "heart"
-        let heartImage = UIImage(systemName: imageName)
-//        favButton.setImage(heartImage, for: .normal)
-//        favButton.tintColor = book.isFavorite ?? false ? .red : .gray
     }
-
 }

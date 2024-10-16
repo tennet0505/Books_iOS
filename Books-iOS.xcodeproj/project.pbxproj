@@ -93,6 +93,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		063019032CBFE619004A5CF6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				06958EE92CB9E94300895527 /* DetailsViewController.swift */,
+				06958EEA2CB9E94300895527 /* MainViewController.swift */,
+				06958F052CBA915700895527 /* MyLibraryViewController.swift */,
+				06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */,
+				06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */,
+				06AEF0022CBEC19C00E6C2A7 /* PDFViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		06958EE12CB9E94300895527 /* DB */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,13 +143,8 @@
 		06958EEB2CB9E94300895527 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				063019032CBFE619004A5CF6 /* Controllers */,
 				06AEEFF32CBE967300E6C2A7 /* Cells */,
-				06958EE92CB9E94300895527 /* DetailsViewController.swift */,
-				06958EEA2CB9E94300895527 /* MainViewController.swift */,
-				06958F052CBA915700895527 /* MyLibraryViewController.swift */,
-				06AEEFF12CBE966900E6C2A7 /* SearchViewController.swift */,
-				06AEEFFC2CBE9A4300E6C2A7 /* BaseViewController.swift */,
-				06AEF0022CBEC19C00E6C2A7 /* PDFViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

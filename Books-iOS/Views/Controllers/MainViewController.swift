@@ -17,7 +17,7 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     private let viewModel = BookViewModel()
-    private var cancellables = Set<AnyCancellable>()    
+    private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class MainViewController: BaseViewController {
     @objc func handleFavoriteStatusChanged(_ notification: Notification) {
         viewModel.fetchBooks()
     }
-        
+    
     private func setupBindings() {
         viewModel.$popularBooks
             .sink { [weak self] _ in

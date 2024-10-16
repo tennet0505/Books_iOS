@@ -100,22 +100,6 @@ class Books_iOSTests: XCTestCase {
         
         wait(for: [expectation], timeout: 2.0)
     }
-
-//    func testToggleFavoriteStatus() {
-//        // Given
-//        viewModel.fetchFavBooks() // Fetching books
-//        
-//        // When
-//        let book = viewModel.books[0]
-//        viewModel.toggleFavoriteStatus(for: book) // Assuming toggleFavorite is implemented
-//        
-//        // Then
-//        XCTAssertTrue((viewModel.books[0].isFavorite != nil), "The book should be marked as favorite.")
-//        
-//        // Toggle again to unmark
-//        viewModel.toggleFavoriteStatus(for: book)
-//        XCTAssertFalse((viewModel.books[0].isFavorite != nil), "The book should be unmarked as favorite.")
-//    }
 }
 
 class MockAPIService: APIServiceProtocol  {

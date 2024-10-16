@@ -119,6 +119,5 @@ class SearchViewModel: ObservableObject {
             return "Failed to decode response."
         }
     }
-    
 }
 
