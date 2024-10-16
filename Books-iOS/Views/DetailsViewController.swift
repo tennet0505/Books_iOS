@@ -13,7 +13,6 @@ class DetailsViewController: BaseViewController {
 
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var bookImageView: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var bookTitle: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -36,14 +35,12 @@ class DetailsViewController: BaseViewController {
         book = viewModel.fetchBookById(id)
         let url = URL(string: book?.imageUrl ?? "")
         imageView.kf.setImage(with: url)
-        bookImageView.kf.setImage(with: url)
         descriptionLabel.text = book?.bookDescription
         isFavorite = book?.isFavorite ?? false
         bestNewLabel.text = (book?.isPopular ?? false) ? "Popular" : "New"
         bookTitle.text = book?.title
         authorLabel.text = book?.author
         readBookButton.isHidden = !isFavorite
-        imageView.addBlurEffect()
         setupFavoriteButton()
     }
     
