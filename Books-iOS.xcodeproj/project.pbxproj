@@ -154,8 +154,8 @@
 				06958EED2CB9E94300895527 /* Assets.xcassets */,
 				06958EEE2CB9E94300895527 /* Books_iOS.xcdatamodeld */,
 				06958EEF2CB9E94300895527 /* Info.plist */,
-				06958EF12CB9E94300895527 /* LaunchScreen.storyboard */,
 				06958EF32CB9E94300895527 /* Main.storyboard */,
+				06958EF12CB9E94300895527 /* LaunchScreen.storyboard */,
 				06958EF42CB9E94300895527 /* SceneDelegate.swift */,
 			);
 			path = "Books-iOS";

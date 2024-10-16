@@ -71,8 +71,9 @@ extension MyLibraryViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FavoriteCollectionViewCell", for: indexPath) as! FavoriteCollectionViewCell
         cell.configure(with: viewModel.filteredBooks[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -104,6 +105,7 @@ extension MyLibraryViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchQuery = searchText
     }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         cancelButton.isHidden = true
@@ -111,6 +113,7 @@ extension MyLibraryViewController: UISearchBarDelegate {
             performSearch(for: query)
         }
     }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         cancelButton.isHidden = false
     }
@@ -122,5 +125,22 @@ extension MyLibraryViewController: UISearchBarDelegate {
     
     func performSearch(for query: String) {
         viewModel.searchQuery = query
+    }
+}
+
+extension MyLibraryViewController: FavoriteViewCellDelegate {
+    
+    func didTapRemove(in cell: FavoriteCollectionViewCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        var book = viewModel.filteredBooks[indexPath.row]
+        book.isFavorite?.toggle()
+        viewModel.filteredBooks[indexPath.row] = book
+        viewModel.toggleFavoriteStatus(for: book)
+        viewModel.fetchBooks()
+    }
+    
+    func didTapShare(for book: Book) {
+        let activityViewController = UIActivityViewController(activityItems: [book.title], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 }

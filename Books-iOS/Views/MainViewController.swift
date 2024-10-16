@@ -93,11 +93,13 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         if collectionView == self.collectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookCell", for: indexPath) as! BookCell
             cell.configure(with: viewModel.popularBooks[indexPath.row])
+            cell.delegate = self
             return cell
         }
         if collectionView == self.newBooksCollectionView {
             let cell = newBooksCollectionView.dequeueReusableCell(withReuseIdentifier: "NewBookCollectionViewCell", for: indexPath) as! NewBookCollectionViewCell
             cell.configure(with: viewModel.newBooks[indexPath.row])
+            cell.delegate = self
             return cell
         }
         return UICollectionViewCell()
@@ -129,3 +131,23 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+extension MainViewController: BookCellDelegate, NewBookCollectionViewCellDelegate {
+    
+    func didTapFavoriteButton(in cell: NewBookCollectionViewCell) {
+        guard let indexPath = newBooksCollectionView.indexPath(for: cell) else { return }
+        var book = viewModel.newBooks[indexPath.row]
+        book.isFavorite?.toggle()
+        viewModel.newBooks[indexPath.row] = book
+        collectionView.reloadItems(at: [indexPath])
+        viewModel.toggleFavoriteStatus(for: book)
+    }
+    
+    func didTapFavoriteButton(in cell: BookCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        var book = viewModel.popularBooks[indexPath.row]
+        book.isFavorite?.toggle()
+        viewModel.popularBooks[indexPath.row] = book
+        collectionView.reloadItems(at: [indexPath])
+        viewModel.toggleFavoriteStatus(for: book)
+    }
+}
