@@ -628,6 +628,19 @@
                                                     <constraint firstAttribute="height" constant="280" id="wI4-em-orm"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tum-0F-i1s">
+                                                <rect key="frame" x="10" y="321" width="36" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="Zor-dU-HyD"/>
+                                                    <constraint firstAttribute="width" constant="36" id="aPp-U7-Ugm"/>
+                                                </constraints>
+                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
+                                                <connections>
+                                                    <action selector="shareButton:" destination="Ph4-a5-1Yv" eventType="touchUpInside" id="h0g-gL-FJ3"/>
+                                                </connections>
+                                            </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xQe-hi-cjs">
                                                 <rect key="frame" x="64" y="328" width="265" height="46.666666666666686"/>
                                                 <subviews>
@@ -709,23 +722,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBm-VL-JgP">
-                                                <rect key="frame" x="311" y="321" width="72" height="32"/>
+                                                <rect key="frame" x="347" y="321" width="36" height="32"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tum-0F-i1s">
-                                                        <rect key="frame" x="0.0" y="0.0" width="36" height="32"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="32" id="Zor-dU-HyD"/>
-                                                            <constraint firstAttribute="width" constant="36" id="aPp-U7-Ugm"/>
-                                                        </constraints>
-                                                        <color key="tintColor" systemColor="labelColor"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
-                                                        <connections>
-                                                            <action selector="shareButton:" destination="Ph4-a5-1Yv" eventType="touchUpInside" id="h0g-gL-FJ3"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3EN-z3-Q0t">
-                                                        <rect key="frame" x="36" y="0.0" width="36" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="36" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="9eZ-pu-c6P"/>
                                                             <constraint firstAttribute="width" constant="36" id="sHj-3h-Xjf"/>
@@ -744,8 +744,10 @@
                                         <constraints>
                                             <constraint firstItem="44R-yS-7er" firstAttribute="leading" secondItem="h1S-3x-1ZH" secondAttribute="leading" id="3Dw-76-ige"/>
                                             <constraint firstItem="YBm-VL-JgP" firstAttribute="top" secondItem="44R-yS-7er" secondAttribute="bottom" constant="25" id="63m-17-liL"/>
+                                            <constraint firstItem="Tum-0F-i1s" firstAttribute="leading" secondItem="h1S-3x-1ZH" secondAttribute="leading" constant="10" id="B9a-dN-xOi"/>
                                             <constraint firstAttribute="trailing" secondItem="44R-yS-7er" secondAttribute="trailing" id="Dkm-GC-67m"/>
                                             <constraint firstAttribute="trailing" secondItem="YBm-VL-JgP" secondAttribute="trailing" constant="10" id="RYZ-9M-jSy"/>
+                                            <constraint firstItem="Tum-0F-i1s" firstAttribute="top" secondItem="44R-yS-7er" secondAttribute="bottom" constant="25" id="W4R-dW-Yka"/>
                                             <constraint firstItem="xQe-hi-cjs" firstAttribute="top" secondItem="44R-yS-7er" secondAttribute="bottom" constant="32" id="eQF-Gi-0yE"/>
                                             <constraint firstAttribute="trailing" secondItem="yIo-hP-m8n" secondAttribute="trailing" constant="32" id="fCE-H5-Rlp"/>
                                             <constraint firstItem="yIo-hP-m8n" firstAttribute="leading" secondItem="h1S-3x-1ZH" secondAttribute="leading" constant="32" id="kvu-w9-RAi"/>
