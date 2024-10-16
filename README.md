@@ -1,5 +1,15 @@
 # Books_iOS
 
+A simple iOS application built with Swift that allows users to browse, search, and manage their favorite books. This app features a clean user interface and leverages the CoreData database for local storage of book information.
+
+## Features
+
+- **Browse Books**: View a list of available books with their cover images, titles, and authors.
+- **Search Functionality**: Search for books by title or author.
+- **Favorites**: Mark books as favorites and view them in a separate tab.
+- **Light and Dark Themes**: Supports both light and dark mode themes.
+- **Responsive UI**: Built using UIKit for a modern, responsive design.
+
 ## Table of Contents
 1. [Architecture](#1-architecture)
 2. [Design Decisions](#2-design-decisions)
