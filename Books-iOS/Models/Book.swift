@@ -22,3 +22,8 @@ struct Book: Decodable {
     var isPopular: Bool = false
     var pdfUrl: String
 }
+
+struct Genre: Decodable {
+    var title: String
+    var image: String
+}

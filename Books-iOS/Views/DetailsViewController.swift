@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 import PDFKit
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: BaseViewController {
 
     @IBOutlet weak var favButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
@@ -61,6 +61,11 @@ class DetailsViewController: UIViewController {
         let urlString = book?.pdfUrl ?? ""
         pdfVC.pdfUrl = urlString
         self.present(pdfVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func shareButton(_ sender: Any) {
+        let activityViewController = UIActivityViewController(activityItems: [book?.title ?? "My book"], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
     
     func setupFavoriteButton() {

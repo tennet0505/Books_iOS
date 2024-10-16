@@ -92,6 +92,17 @@ class BookViewModel: ObservableObject {
         }
     }
     
+    func fetchBookGenres() -> [Genre] {
+        var genreArray: [Genre] = [Genre(title: "Fantasy", image: "logoGenre"),
+                                Genre(title: "Fantazy", image: "logoGenre"),
+                                Genre(title: "Mystery", image: "logoGenre"),
+                                Genre(title: "Horror", image: "logoGenre"),
+                                Genre(title: "Novel", image: "logoGenre"),
+                                Genre(title: "Biography", image: "logoGenre"),
+                                Genre(title: "Humor", image: "logoGenre")]
+        return genreArray
+    }
+    
     private func handleError(_ error: APIError) -> String {
         switch error {
         case .invalidURL:

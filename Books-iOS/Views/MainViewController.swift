@@ -13,6 +13,7 @@ class MainViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var newBooksCollectionView: UICollectionView!
+    @IBOutlet weak var genreCollectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     private let viewModel = BookViewModel()
@@ -23,7 +24,7 @@ class MainViewController: BaseViewController {
         
         setupBindings()
         viewModel.fetchBooks(isLoading: true)
-        
+        genreCollectionView.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(handleFavoriteStatusChanged(_:)), name: NSNotification.Name("FavoriteStatusChanged"), object: nil)
     }
     
@@ -85,6 +86,9 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         if collectionView == self.newBooksCollectionView {
             return viewModel.newBooks.count
         }
+        if collectionView == self.genreCollectionView {
+            return viewModel.fetchBookGenres().count
+        }
         return 0
     }
     
@@ -102,6 +106,12 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.delegate = self
             return cell
         }
+        if collectionView == self.genreCollectionView {
+            let cell = genreCollectionView.dequeueReusableCell(withReuseIdentifier: "GenreCollectionViewCell", for: indexPath) as! GenreCollectionViewCell
+            cell.config(viewModel.fetchBookGenres()[indexPath.row])
+            return cell
+        }
+        
         return UICollectionViewCell()
     }
     
@@ -118,14 +128,22 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
             vc.bookId = book.id
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        if collectionView == self.genreCollectionView {
+            let alert = UIAlertController(title: "In progress", message: "Comming soon", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.collectionView {
-            return CGSize(width: 160, height: 270)
+            return CGSize(width: 160, height: 286)
         }
         if collectionView == self.newBooksCollectionView {
             return CGSize(width: 150, height: 150)
+        }
+        if collectionView == self.genreCollectionView {
+            return CGSize(width: 80, height: 100)
         }
         return CGSize(width: 0, height: 0)
     }

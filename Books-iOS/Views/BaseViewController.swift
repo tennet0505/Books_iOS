@@ -12,7 +12,13 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let navigationBar = navigationController?.navigationBar {
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationBar.shadowImage = UIImage()
+            navigationBar.isTranslucent = true
+            navigationBar.backgroundColor = .clear
+            navigationBar.tintColor = .white // Change tint color for navigation items if needed
+        }
     }
     
 
