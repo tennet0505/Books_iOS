@@ -119,7 +119,7 @@ cd Books_iOS
 - **Project uses https://mockapi.io/projects
 
 ## 8. Video
-- **Video walkthrough the app:  https://drive.google.com/file/d/1ITcSgd8am5H3HPcT_CHuKqnUo65VOyvy/view?usp=sharing
+- **Video walkthrough the app:  https://drive.google.com/file/d/1_970_cDVatUGL6SIc1yTpcDDt0Qrm_Hd/view?usp=sharing
 - **All screenshots:            https://drive.google.com/drive/folders/13txAPo88YxCurHzGJ-l-_CrlJ9MeF9NT?usp=sharing
 
 MainScreen screenshot:
