@@ -25,6 +25,8 @@ A simple iOS application built with Swift that allows users to browse, search, a
    - [Unit Test Setup](#unit-test-setup)
    - [Running Tests](#running-tests)
 6. [Future Improvements](#6-future-improvements)
+7. [API](#6-API)
+8. [Video](#6-Video)
 
 ---
 
@@ -112,3 +114,16 @@ cd Books_iOS
 - **Error Handling: Implement robust error handling with retry mechanisms.
 - **UI Enhancements: Improve loading indicators and error state displays.
 - **Offline Mode: Expand local caching to allow offline functionality.
+
+## 7. API
+- **Project uses https://mockapi.io/projects
+
+## 8. Video
+Video walkthrough the app:  https://drive.google.com/file/d/1ITcSgd8am5H3HPcT_CHuKqnUo65VOyvy/view?usp=sharing
+All screenshots:            https://drive.google.com/drive/folders/13txAPo88YxCurHzGJ-l-_CrlJ9MeF9NT?usp=sharing
+
+MainScreen screenshot:
+![IMG_8867](https://github.com/user-attachments/assets/a83984dd-1c6d-441f-965c-e60864abd642)
+
+
+
